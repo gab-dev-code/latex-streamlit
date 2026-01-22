@@ -1,0 +1,8 @@
+*.log
+*.aux
+*.out
+*.pdf
+*.toc
+__pycache__/
+.venv/
+.graph/
