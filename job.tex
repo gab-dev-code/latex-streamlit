@@ -1,0 +1,306 @@
+\newcommand{\seriesname}{\detokenize{1046x992-SOLARIX-D-675-20-G-900-SUEDE-s50p1M10HC}}
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{cmbright}
+\usepackage[
+    a4paper, 
+    left=1.5cm, 
+    right=1.5cm, 
+    top=1.5cm, 
+    bottom=1.2cm
+]{geometry}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{colortbl} 
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{helvet}
+\usepackage{datatool} % CSV Handling
+\usepackage{subcaption}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\usepackage{fontsize}
+
+\usepackage{fontspec}
+\setmainfont{avenir-next-regular.ttf}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% Define colors
+\definecolor{solarixblue}{RGB}{199,231,255}
+\definecolor{lightgray}{RGB}{240,240,240}
+
+% Load Data
+\DTLcleardb{panels}
+\DTLloaddb{panels}{data.csv}
+
+\newcommand{\moduletechnology}{glass-glass, Back Contact M10 HC}
+\newcommand{\maxsystemvoltage}{1000 V}
+\newcommand{\bypassdiodes}{2}
+\newcommand{\connectors}{Stäubli MC4-Evo 2, 4mm$^2$}
+\newcommand{\tempcoeffisc}{0.06 \%}
+\newcommand{\tempcoeffvoc}{-0.30 \%}
+\newcommand{\tempcoeffpmax}{-0.32 \%}
+
+\newcommand{\disclaimer}{\textbf{Note:} Due to continuous technical innovation, R\&D and improvement, the technical data mentioned in this document may be modified accordingly. Solarix has the sole right to make such modifications at any time without prior notice. The demanding party shall request the latest datasheet for such a contract need, and make it a consistent and binding part of lawful documentation duly signed by both parties.}
+
+\newcommand{\warrantycolor}{10 years warranty on colour retention}
+\newcommand{\warrantymaterial}{10 years warranty for materials and processing}
+\newcommand{\warrantypower}{25 years warranty extra linear power output}
+\newcommand{\degradationfirst}{\lt 2\%}
+\newcommand{\degradationyearly}{<0.55\%/year over years 2-25}
+\newcommand{\guaranteedpower}{85\% guaranteed power after 25 years}
+\newcommand{\fireclassification}{B-s1, d0 (EN 13501-1)}
+\newcommand{\companyaddress}{Flevolaan 19, 1382 JX Weesp, The Netherlands}
+\newcommand{\companyemail}{\href{mailto:info@solarix-solar.com}{{info@solarix-solar.com}}}
+\newcommand{\phonenr}{+31\,(0)20\,2440641}
+\newcommand{\companywebsite}{\href{https://solarix-solar.com}{solarix-solar.com}}
+
+
+
+\begin{document}
+\pagestyle{empty}
+
+\DTLassign{panels}{1}{%
+    \seriesname=series, \designname=design, \collection=coll, \colorname=color, \designdetails=detail, \pmax=pmax, \voc=voc, \isc=isc, \vmp=vmp, \imp=imp, \eff=eff,
+    \weight=weight, \width=w, \height=h, \thickval=t, \photo=photo%
+}
+
+% \DTLforeach{panels}{%
+%     \seriesname=series, \designname=design, \collection=coll, \colorname=color, \designdetails=detail, \pmax=pmax, \voc=voc, \isc=isc, \vmp=vmp, \imp=imp, \eff=eff,
+%     \weight=weight, \width=w, \height=h, \thickval=t, \photo=photo %
+% }{%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Page 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent%
+\includegraphics[width=25mm]{photos/logo.png} 
+\hfill 
+\fontsize{10}{12}\selectfont Product datasheet \seriesname
+
+\vspace{1cm}
+
+\setlength{\fboxsep}{0pt}
+\noindent\hspace*{-\dimexpr\oddsidemargin+1in\relax}%
+\colorbox{solarixblue}{%
+    \begin{minipage}[t][220mm]{\paperwidth}
+        \vspace*{10mm}
+        \hspace*{15mm}%
+        \begin{minipage}{\dimexpr\paperwidth-40mm}
+            \raggedright
+            \fontsize{48}{58}\selectfont
+            \textcolor{white}{%
+                Solarix:\\[0.5cm]
+                High-performance\\
+                solar panels\\
+                with unparalleled\\
+                design.
+            }\\[1cm]
+            \fontsize{12}{17}\selectfont
+            Product datasheet\\
+            \seriesname \\
+            \vspace{3cm}
+            \begin{minipage}[t]{0.55\textwidth}
+                \fontsize{9}{12}\selectfont
+                \textbf{Unparalleled aesthetics} \\
+                At Solarix we look from a design point of view to solar applications. We make them both beautiful and long-lasting. Our design team is constantly developing colours and designs that make your facade the most eye-catching one in town. \par
+                \vspace{5mm}
+                \textbf{High-quality product} \\
+                \fontsize{9}{12}\selectfont The high-performance solar cells are sandwiched between extremely stable tempered glass plates, guaranteeing a trustworthy performance and a supreme longevity. Our colour techniques have the best-in-class retention based on inorganic pigments that remain virtually unaffected by UV radiation.
+            \end{minipage}%
+            \hfill
+            \begin{minipage}[t]{0.4\textwidth}
+                \fontsize{9}{12}\selectfont
+                \textbf{Quality} \\
+                \warrantycolor \\
+                \warrantymaterial \\
+                \warrantypower \par
+                \vspace{5mm}    
+                \textbf{Linear power degradation warranty}\\
+                First year $<$ 2\%, $<$ 0.55\%/year for years 2-25 \\ 85\% guaranteed power after 25 years \par
+                \vspace{5mm}
+                \textbf{Fire classification}\\
+                \fontsize{9}{12}\selectfont \fireclassification
+            \end{minipage}%
+        \end{minipage}%
+    \end{minipage}%
+}
+
+\vfill
+
+{\footnotesize
+\noindent \disclaimer
+
+\vspace{0.5cm}
+
+\noindent\textbf{Contact information} \quad \companyaddress \quad \companyemail \quad \phonenr \hfill \companywebsite
+}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Page 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent%
+\includegraphics[width=25mm]{photos/logo.png} 
+\hfill 
+\fontsize{10}{12}\selectfont Product datasheet \seriesname
+
+\vspace{1cm}
+
+\begin{table}[h]
+\centering
+{
+    \begin{tabular}{p{0.35\textwidth} p{0.6\textwidth}}
+    \multicolumn{2}{l}{\textbf{Color and Design Information}} \\
+    \midrule
+    Design name & \designname \\
+    \midrule
+    Collection & \collection \\
+    \midrule
+    Design & \\
+    \midrule
+    Colour & \colorname \\
+    \midrule
+    Colour details & \\
+    \midrule
+    Design details & \designdetails \\
+    \midrule
+    & \\
+    \multicolumn{2}{l}{\textcopyright \quad European registered design (ERD)} \\
+    \end{tabular}
+}
+\end{table}
+
+\vspace{1cm}
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \flushleft
+        \includegraphics[width=\linewidth, height=14cm, keepaspectratio=true]{photos/\photo}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \flushright
+        \includegraphics[width=\linewidth, height=13cm,keepaspectratio=true]{photos/\seriesname.png}
+    \end{minipage}
+\end{figure}
+
+\vfill
+
+{\footnotesize
+\noindent \disclaimer
+
+\vspace{0.5cm}
+
+\noindent\textbf{Contact information} \quad \companyaddress \quad \companyemail \quad \phonenr \hfill \companywebsite
+}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Page 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent%
+\includegraphics[width=25mm]{photos/logo.png} 
+\hfill 
+\fontsize{10}{12}\selectfont Product datasheet \seriesname
+
+\vspace{1.5cm}
+
+\begin{table}[h]
+\centering
+    \begin{tabular}{p{0.35\textwidth} p{0.6\textwidth}}
+    \multicolumn{2}{l}{\textbf{Solar panel \textbar \, general data}} \\
+    \midrule
+    Series name & \seriesname \\
+    \midrule
+    Module technology & \moduletechnology \\
+    \midrule
+    W × H × t & \width \ × \height \ × \thickval \ mm  \\
+    \midrule
+    Max. system voltage & \maxsystemvoltage \\
+    \midrule
+    Weight & approx. \weight \ kg\\
+    \midrule
+    By-pass diodes & \bypassdiodes \\
+    \midrule
+    Connectors & \connectors \\
+    \midrule
+    \end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+%\section*{Electrical data (STC)}
+
+\noindent \textbf{Electrical data (STC)} \\
+\footnotesize STC (Standard Test Conditions): Illumination intensity 1,000 W/m$^2$, spectral distribution AM 1.5; Temperature 25 $\pm$ 2$^\circ$ C in accordance with EN 60904-3.
+
+\vspace{0.3cm}
+
+\begin{minipage}{0.48\textwidth}
+        %\large
+        \centering
+        \begin{tabular}{ll}
+        \toprule
+        Maximum power, $P_{max}$ & \pmax \ Wp \\
+        Open-circuit voltage, $V_{oc}$ & \voc \ V \\
+        Short-circuit current, $I_{sc}$ & \isc \ A \\
+        \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        %\large
+        \centering
+        \begin{tabular}{ll}
+        \toprule
+        Voltage at max. power, $V_{mpp}$ & \vmp \ V \\
+        Current at max. power, $I_{mpp}$ & \imp \ A \\
+        Efficiency, $\eta$ & \eff \ \% \\
+        \bottomrule
+        \end{tabular}
+\end{minipage}
+
+\vspace{0.5cm}
+
+{\noindent \footnotesize Measurement tolerances: $P_{max} \pm$ 10\%; $V_{oc}\pm$10\%; $I_{sc} \pm$ 10\%, $I_{mpp} \pm$ 10\%, Reverse-current power rating $I_r = 10 A$, operating modules with an external power source is only permissible if using a phase fuse with a tripping current of $\leq$ 10 A.} \par
+
+%\noindent \textbf{Temperature coefficients} \\
+
+\begin{table}[h]
+\centering
+    \begin{tabular}{p{0.35\textwidth} p{0.6\textwidth}}
+    \multicolumn{2}{l}{\textbf{Temperature coefficients}} \\
+    \midrule
+    Temperature coefficient of $I_{sc}$ & \tempcoeffisc \\
+    \midrule
+    Temperature coefficient of $V_{oc}$ & \tempcoeffvoc \\
+    \midrule
+    Temperature coefficient of $P_{max}$ & \tempcoeffpmax \\
+    \midrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{photos/IV_curve.png}
+\end{figure}
+
+\vfill
+
+
+{
+  \footnotesize \noindent
+  Solarix \textcopyright \quad Product datasheet according to EN50380:2003 \\
+  Certification IEC 61215 \& IEC 61730 \\
+  \disclaimer \par
+}
+
+\vspace{0.5cm}
+
+\noindent\textbf{Contact information} \quad \companyaddress \quad \companyemail \quad \phonenr \hfill \companywebsite
+
+\newpage
+
+%}%
+\end{document}

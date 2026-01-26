@@ -31,8 +31,9 @@
 \definecolor{solarixblue}{RGB}{199,231,255}
 \definecolor{lightgray}{RGB}{240,240,240}
 
-% CSV Data
-\DTLloaddb{panels}{data_heidelberg.csv}
+% Load Data
+\DTLcleardb{panels}
+\DTLloaddb{panels}{data.csv}
 
 \newcommand{\moduletechnology}{glass-glass, Back Contact M10 HC}
 \newcommand{\maxsystemvoltage}{1000 V}
@@ -61,11 +62,15 @@
 \begin{document}
 \pagestyle{empty}
 
-\DTLforeach{panels}{%
-    % Map CSV headers to LaTeX commands
+\DTLassign{panels}{1}{%
     \seriesname=series, \designname=design, \collection=coll, \colorname=color, \designdetails=detail, \pmax=pmax, \voc=voc, \isc=isc, \vmp=vmp, \imp=imp, \eff=eff,
-    \weight=weight, \width=w, \height=h, \thickval=t, \photo=photo %
-}{%
+    \weight=weight, \width=w, \height=h, \thickval=t, \photo=photo%
+}
+
+% \DTLforeach{panels}{%
+%     \seriesname=series, \designname=design, \collection=coll, \colorname=color, \designdetails=detail, \pmax=pmax, \voc=voc, \isc=isc, \vmp=vmp, \imp=imp, \eff=eff,
+%     \weight=weight, \width=w, \height=h, \thickval=t, \photo=photo %
+% }{%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Page 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent%
@@ -93,7 +98,7 @@
             }\\[1cm]
             \fontsize{12}{17}\selectfont
             Product datasheet\\
-            \seriesname
+            \seriesname \\
             \vspace{3cm}
             \begin{minipage}[t]{0.55\textwidth}
                 \fontsize{9}{12}\selectfont
@@ -167,16 +172,17 @@
 
 \vspace{1cm}
 
-\begin{figure}[h]
-    \begin{subfigure}{0.47\textwidth}
+\begin{figure}[ht]
     \centering
-        \includegraphics[width=0.9\linewidth]{photos/solarix-me-855.jpg}
-    \end{subfigure}
-\hspace{1.5cm}
-    \begin{subfigure}{0.47\textwidth}
-    \centering
-        \includegraphics[scale=0.8]{photos/\photo}
-    \end{subfigure}
+    \begin{minipage}{0.48\textwidth}
+        \flushleft
+        \includegraphics[width=\linewidth, height=14cm, keepaspectratio=true]{photos/\photo}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \flushright
+        \includegraphics[width=\linewidth, height=13cm,keepaspectratio=true]{photos/\seriesname.png}
+    \end{minipage}
 \end{figure}
 
 \vfill
@@ -231,25 +237,27 @@
 \vspace{0.3cm}
 
 \begin{minipage}{0.48\textwidth}
-\centering
-\begin{tabular}{ll}
-\toprule
-Maximum power, $P_{max}$ & \pmax \ Wp \\
-Open-circuit voltage, $V_{oc}$ & \voc \ V \\
-Short-circuit current, $I_{sc}$ & \isc \ A \\
-\bottomrule
-\end{tabular}
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\textwidth}
-\centering
-\begin{tabular}{ll}
-\toprule
-Voltage at max. power, $V_{mpp}$ & \vmp \ V \\
-Current at max. power, $I_{mpp}$ & \imp \ A \\
-Efficiency, $\eta$ & \eff \ \% \\
-\bottomrule
-\end{tabular}
+        %\large
+        \centering
+        \begin{tabular}{ll}
+        \toprule
+        Maximum power, $P_{max}$ & \pmax \ Wp \\
+        Open-circuit voltage, $V_{oc}$ & \voc \ V \\
+        Short-circuit current, $I_{sc}$ & \isc \ A \\
+        \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        %\large
+        \centering
+        \begin{tabular}{ll}
+        \toprule
+        Voltage at max. power, $V_{mpp}$ & \vmp \ V \\
+        Current at max. power, $I_{mpp}$ & \imp \ A \\
+        Efficiency, $\eta$ & \eff \ \% \\
+        \bottomrule
+        \end{tabular}
 \end{minipage}
 
 \vspace{0.5cm}
@@ -274,7 +282,7 @@ Efficiency, $\eta$ & \eff \ \% \\
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\linewidth]{photos/IV_curve.png}
+    \includegraphics[width=0.9\linewidth]{photos/IV_curve.png}
 \end{figure}
 
 \vfill
@@ -293,5 +301,5 @@ Efficiency, $\eta$ & \eff \ \% \\
 
 \newpage
 
-}%
+%}%
 \end{document}
