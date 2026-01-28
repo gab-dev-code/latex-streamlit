@@ -22,7 +22,7 @@ query_params = st.query_params
 if "data" in query_params and st.session_state.df is None:
     try:
         data_dict = json.loads(query_params["data"])
-        st.session_state.df = pd.DataFrame([data_dict])
+        st.session_state.df = pd.DataFrame(data_dict)
     except Exception as e:
         st.error(f"Error parsing URL data: {e}")
 
