@@ -33,7 +33,7 @@
 \definecolor{lightgray}{RGB}{240,240,240}
 
 % Load Data
-\DTLcleardb{panels}
+\DTLifdbexists{panels}{\DTLcleardb{panels}}{\DTLnewdb{panels}}
 \DTLloaddb{panels}{data.csv}
 
 \newcommand{\moduletechnology}{glass-glass, Back Contact M10 HC}
