@@ -92,29 +92,23 @@ def calculate_cell_layout(panel_width, panel_height, total_cells):
 
 def draw_panel_sketch(series_name, output_path):
     """
-    Generate a simple panel sketch from a series name.
-    
-    Parameters:
-    -----------
-    series_name : str
-        Series name like "1745x670-SOLARIX-ME-855-G-904-MATT-SNOW-s54p1M10HC"
-    output_path : str
-        Where to save the output image
-    
-    Returns:
-    --------
-    bool : True if successful, False otherwise
+    Generate a portrait-oriented panel sketch by swapping input dimensions.
     """
     try:
-        # Parse the series name
-        panel_width, panel_height, total_cells, parallel_strings = parse_series_name(series_name)
+        # 1. Parse original dimensions
+        orig_width, orig_height, total_cells, parallel_strings = parse_series_name(series_name)
         
-        # Calculate cell layout
+        # 2. SWAP dimensions for Portrait (90 degrees CCW rotation)
+        # If input is 1745x670, we treat it as 670x1745
+        panel_width = orig_width if orig_width < orig_height else orig_height
+        panel_height = orig_height if orig_height > orig_width else orig_width
+        
+        # 3. Calculate cell layout based on new dimensions
         cells_h, cells_v, cell_w, cell_h, h_gap, v_gap = calculate_cell_layout(
             panel_width, panel_height, total_cells
         )
         
-        # Create figure - always vertical orientation
+        # Create figure
         fig, ax = plt.subplots(1, 1, figsize=(8, 12), facecolor='white')
         ax.set_facecolor('white')
         
@@ -141,25 +135,24 @@ def draw_panel_sketch(series_name, output_path):
                                      linewidth=0.5, edgecolor='black', facecolor='none')
                 ax.add_patch(cell_rect)
         
-        # Add dimensions at top and right
+        # 4. Update dimension labels to reflect the new orientation
+        # Width label on top
         ax.text(panel_width/2, panel_height + 30, str(int(panel_width)), 
                 ha='center', va='bottom', fontsize=18, color='black')
         
+        # Height label on right
         ax.text(panel_width + 30, panel_height/2, str(int(panel_height)), 
                 ha='left', va='center', fontsize=18, color='black', rotation=270)
         
         # Set axis limits
-        ax.set_xlim(-20, panel_width + 60)
-        ax.set_ylim(-20, panel_height + 60)
+        ax.set_xlim(-50, panel_width + 100)
+        ax.set_ylim(-50, panel_height + 100)
         ax.set_aspect('equal')
         ax.axis('off')
         
         plt.tight_layout()
         plt.savefig(output_path, dpi=200, bbox_inches='tight', facecolor='white', edgecolor='none')
         plt.close()
-        
-        print(f"Panel sketch created: {cells_h}x{cells_v} = {total_cells} cells, "
-              f"margins: L/R={left_right_margin:.1f}mm, T/B={top_bottom_margin:.1f}mm")
         
         return True
         

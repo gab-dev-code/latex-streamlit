@@ -83,7 +83,8 @@ if st.session_state.df is not None:
             # Define \seriesname at the top of the file to handle special characters
             # We use \detokenize to prevent underscores from breaking LaTeX
             # 1. Handle the dynamic photo name
-            photo_filename = str(row.get('photo', 'default.jpg')) 
+            photo_filename = f"{row.get('design', 'default')}.jpg"
+            #print(photo_filename)
             
             # 2. Format the data safely
             formatted_row = row.copy()
